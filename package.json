@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/prepare-db-url.js && next dev --turbopack",
-    "build": "node scripts/prepare-db-url.js && next build",
+    "build": "node scripts/prepare-db-url.js && (prisma migrate deploy && npx prisma db seed || true) && next build",
     "start": "node scripts/prepare-db-url.js && next start",
     "lint": "next lint",
     "postinstall": "node scripts/prepare-db-url.js && prisma generate"
   },
   "prisma": {
-    "seed": "bun prisma/seed.ts"
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
