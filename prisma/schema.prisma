@@ -70,11 +70,12 @@ model Verification {
 }
 
 model TwoFactor {
-  id          String @id
+  id          String  @id
   secret      String
   backupCodes String
-  userId      String @unique
-  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verified    Boolean @default(false)
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("two_factor")
 }
