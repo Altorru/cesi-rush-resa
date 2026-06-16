@@ -4,7 +4,7 @@ export default function Footer() {
    return (
       <footer className="border-t py-6 md:py-0">
          <div className="flex items-center justify-center overflow-hidden">
-            <div className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-bold select-none pointer-events-none leading-none bg-gradient-to-br from-primary/30 to-primary/5 bg-clip-text text-transparent opacity-60 tracking-tighter">
+            <div className="text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] font-bold select-none pointer-events-none leading-none bg-gradient-to-br from-primary/30 to-primary/5 bg-clip-text text-transparent opacity-40 sm:opacity-60 tracking-tighter">
                RUSH RESA
             </div>
          </div>

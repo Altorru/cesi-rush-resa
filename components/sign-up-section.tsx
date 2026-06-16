@@ -6,9 +6,9 @@ import SignUpForm from "./sign-up-form"
 
 export default function SignUpSection() {
    return (
-      <div className="flex items-center justify-center min-h-screen">
-         <div className="flex flex-1 flex-col justify-center px-4 py-10 lg:px-6">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="flex items-center justify-center min-h-screen px-4 sm:px-6">
+         <div className="flex flex-1 flex-col justify-center py-8 sm:py-10 max-w-md">
+            <div className="w-full">
                <div className="flex items-center">
                   <Logo />
                </div>

@@ -208,7 +208,7 @@ export default function TwoFactorSetup() {
                         <CardDescription>Votre compte est protégé par la 2FA</CardDescription>
                      </div>
                   </div>
-                  <Badge variant="secondary" className="bg-green-500/10 text-green-500 hover:bg-green-500/20">
+                  <Badge variant="secondary" className="bg-green-500/10 text-green-500 hover:bg-green-500/20 shrink-0">
                      <Check className="mr-1 h-3 w-3" />
                      Activée
                   </Badge>
@@ -302,7 +302,7 @@ export default function TwoFactorSetup() {
                         </Button>
                      </div>
                      <div className="rounded-lg border border-border bg-muted/30 p-3">
-                        <div className="grid grid-cols-2 gap-1.5 font-mono text-xs">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-xs">
                            {backupCodes.map((code, i) => (
                               <div
                                  key={i}
@@ -398,7 +398,7 @@ export default function TwoFactorSetup() {
                         </Button>
                      </div>
                      <div className="rounded-lg border border-border bg-muted/30 p-3">
-                        <div className="grid grid-cols-2 gap-1.5 font-mono text-xs">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 font-mono text-xs">
                            {backupCodes.map((code, i) => (
                               <div
                                  key={i}

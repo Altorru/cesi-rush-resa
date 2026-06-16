@@ -63,7 +63,7 @@ export default function TwoFactorVerifyForm() {
 
    return (
       <div className="flex min-h-screen items-center justify-center p-4">
-         <Card className="w-full max-w-md">
+         <Card className="w-full max-w-md mx-1 sm:mx-0">
             <CardHeader className="text-center">
                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                   <Shield className="h-8 w-8 text-primary" />

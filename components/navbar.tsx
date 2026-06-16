@@ -12,38 +12,31 @@ export default function Navbar() {
    const user = useUser();
    return (
       <header className="sticky top-0 z-100 flex justify-center py-2">
-         <div className="container border rounded-md w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2 px-4">
-            <nav className="flex items-center justify-between gap-4 sm:gap-6">
-               <div className="flex items-center gap-6">
+         <div className="container border rounded-md w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2">
+            <nav className="flex items-center justify-between gap-2 sm:gap-6">
+               <div className="flex items-center gap-2 sm:gap-6">
                   <Logo />
                </div>
-               <div className='flex items-center gap-2'>
+               <div className='flex items-center gap-1 sm:gap-2'>
                   {user ? (
                      <>
-
                         <Link
                            href="/dashboard"
-                           className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                         >
-                           <Button variant="outline">
+                           <Button variant="outline" size="sm" className="text-xs sm:text-sm sm:h-9">
                               Tableau de bord
                            </Button>
-
                         </Link>
                         <SignOutForm />
                      </>
                   ) : (
                      <>
-
-                        <Link
-                           href="/sign-in"
-                           className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                        >
-                           <Button variant="outline">
+                        <Link href="/sign-in">
+                           <Button variant="outline" size="sm" className="text-xs sm:text-sm sm:h-9">
                               Connexion
                            </Button>
                         </Link>
-                        <Button asChild>
+                        <Button asChild size="sm" className="text-xs sm:text-sm sm:h-9">
                            <Link href="/sign-up">S&apos;inscrire</Link>
                         </Button>
                      </>

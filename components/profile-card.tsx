@@ -16,19 +16,19 @@ export default function ProfileCard() {
    return (
       <Card className="overflow-hidden">
          <CardHeader className="relative p-0">
-            <div className="h-32 bg-gradient-to-r from-primary/20 to-primary/40"></div>
-            <div className="absolute -bottom-12 left-4">
+            <div className="h-24 sm:h-32 bg-gradient-to-r from-primary/20 to-primary/40"></div>
+            <div className="absolute -bottom-10 sm:-bottom-12 left-3 sm:left-4">
                <div className="relative">
-                  <Avatar className="h-24 w-24 border-4 border-background">
+                  <Avatar className="h-20 w-20 sm:h-24 sm:w-24 border-4 border-background">
                      <AvatarImage src={user?.image || ''} alt="John Doe" />
-                     <AvatarFallback className="text-6xl font-bold">
+                     <AvatarFallback className="text-4xl sm:text-6xl font-bold">
                         {user?.name?.charAt(0)}
                      </AvatarFallback>
                   </Avatar>
                </div>
             </div>
          </CardHeader>
-         <CardContent className="pt-14">
+         <CardContent className="pt-12 sm:pt-14">
             <div className="space-y-1">
                <h3 className="font-semibold text-xl">
                   {user?.name}
@@ -37,7 +37,7 @@ export default function ProfileCard() {
                   {user?.email}
                </p>
             </div>
-            <div className="flex items-center gap-2 mt-4">
+            <div className="flex flex-wrap items-center gap-2 mt-4">
                <Badge variant="outline" className="flex items-center gap-1">
                   <Check className="h-3 w-3" />
                   {user?.emailVerified ? 'Vérifié' : 'Non vérifié'}

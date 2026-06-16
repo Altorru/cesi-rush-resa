@@ -123,30 +123,30 @@ const stack = [
 export default function TechStackSection() {
 
    return (
-      <section className="pb-20 pt-20 md:pb-32 md:pt-32 container mx-auto">
-         <FadeInView className="text-center space-y-4 pb-16 mx-auto max-w-4xl">
-            <Badge className='px-4 py-1.5 text-sm font-medium'>Outils</Badge>
-            <h2 className="mx-auto mt-4 text-3xl font-bold sm:text-5xl tracking-tight">
+      <section className="pb-12 sm:pb-20 md:pb-32 pt-12 sm:pt-20 md:pt-32 container mx-auto">
+         <FadeInView className="text-center space-y-3 sm:space-y-4 pb-10 sm:pb-16 mx-auto max-w-4xl">
+            <Badge className='px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium'>Outils</Badge>
+            <h2 className="mx-auto mt-3 sm:mt-4 text-2xl sm:text-4xl md:text-5xl tracking-tight">
                Catégorie d&apos;outils
             </h2>
-            <p className="text-xl text-muted-foreground pt-1">
+            <p className="text-base sm:text-xl text-muted-foreground pt-1">
                Découvrez notre large gamme d&apos;outils de chantier
             </p>
          </FadeInView>
 
-         <Card className="grid divide-x divide-y overflow-hidden rounded-3xl border border-card sm:grid-cols-2 lg:grid-cols-3 lg:divide-y-0">
+         <Card className="grid divide-x divide-y overflow-hidden rounded-2xl sm:rounded-3xl border border-card sm:grid-cols-2 lg:grid-cols-3 lg:divide-y-0">
             {stack.map((item, index) => (
                <FadeInView
                   key={index}
                   delay={0.1 * (index + 2)}
                   className="group relative transition-shadow duration-300 hover:z-[1] hover:shadow-2xl hover:shadow-primary"
                >
-                  <div className="relative space-y-8 py-12 p-8">
-                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                  <div className="relative space-y-6 sm:space-y-8 py-8 sm:py-12 px-5 sm:p-8">
+                     <div className="flex h-10 sm:h-12 w-10 sm:w-12 items-center justify-center rounded-full bg-primary/10">
                         {item.icon}
                      </div>
                      <div className="space-y-2">
-                        <h5 className="text-xl text-muted-foreground font-semibold transition group-hover:text-primary">
+                        <h5 className="text-lg sm:text-xl text-muted-foreground font-semibold transition group-hover:text-primary">
                            {item.name}
                         </h5>
                         <div className="text-muted-foreground">
