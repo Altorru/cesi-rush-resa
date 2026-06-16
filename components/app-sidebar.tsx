@@ -1,6 +1,6 @@
 "use client"
 
-import { CalendarCheck, HardHat, LayoutDashboard, Settings, Shield, ListChecks } from "lucide-react"
+import { CalendarCheck, HardHat, LayoutDashboard, Settings, Shield, ListChecks, Wrench } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -57,6 +57,12 @@ const adminItems = [
       label: "Gestion réservations",
       icon: ListChecks,
       isActive: (pathname: string) => pathname.startsWith("/dashboard/admin/reservations"),
+   },
+   {
+      href: "/dashboard/admin/materiel",
+      label: "Gestion matériel",
+      icon: Wrench,
+      isActive: (pathname: string) => pathname.startsWith("/dashboard/admin/materiel"),
    },
 ] as const
 
