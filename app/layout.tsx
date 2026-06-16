@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from 'next/font/google';
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "@/components/ui/sonner";
 
-const notoSansKR = Noto_Sans_KR({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  variable: '--font-noto-sans-kr',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: "Better Auth Starter",
-  description: "Next.js + Better Auth + Shadcn UI + Tailwind CSS",
+  title: "CESI Rush Resa",
+  description: "Application de réservation",
   icons: {
     icon: '/logo.png'
   }
@@ -25,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${notoSansKR.variable}`} suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
       <body
         className={` antialiased`}
       >
