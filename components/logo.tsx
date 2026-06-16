@@ -6,10 +6,11 @@ export default function Logo() {
    return (
       <Link href="/" className="flex items-center">
          <Image
-            src={'/logo.png'}
-            alt="Logo"
-            width={128}
-            height={128}
+            src={'/rect-logo.png'}
+            alt="CESI Rush Resa"
+            width={106}
+            height={52}
+            className="h-auto w-auto"
             priority
          />
       </Link>
