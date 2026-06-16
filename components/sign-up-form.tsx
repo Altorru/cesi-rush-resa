@@ -38,7 +38,7 @@ export default function SignUpForm() {
          name,
       }, {
          onRequest: () => {
-            toast("Signing up...")
+            toast("Inscription en cours...")
          },
          onSuccess: () => {
             form.reset()
@@ -58,9 +58,9 @@ export default function SignUpForm() {
                name="name"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Name</FormLabel>
+                     <FormLabel>Nom</FormLabel>
                      <FormControl>
-                        <Input placeholder="John Doe" {...field} />
+                        <Input placeholder="Jean Dupont" {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -71,9 +71,9 @@ export default function SignUpForm() {
                name="email"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Email</FormLabel>
+                     <FormLabel>Adresse email</FormLabel>
                      <FormControl>
-                        <Input placeholder="m@example.com" {...field} />
+                        <Input placeholder="exemple@email.com" {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -84,7 +84,7 @@ export default function SignUpForm() {
                name="password"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Password</FormLabel>
+                     <FormLabel>Mot de passe</FormLabel>
                      <FormControl>
                         <Input type="password" placeholder="********" {...field} />
                      </FormControl>
@@ -93,7 +93,7 @@ export default function SignUpForm() {
                )}
             />
             <Button type="submit" className="w-full">
-               Register
+               S&apos;inscrire
             </Button>
          </form>
       </Form>

@@ -40,11 +40,11 @@ export default function ProfileCard() {
             <div className="flex items-center gap-2 mt-4">
                <Badge variant="outline" className="flex items-center gap-1">
                   <Check className="h-3 w-3" />
-                  {user?.emailVerified ? 'Verified' : 'Not Verified'}
+                  {user?.emailVerified ? 'Vérifié' : 'Non vérifié'}
                </Badge>
                <Badge variant="outline" className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
-                  Member since {user?.createdAt?.getFullYear()}
+                  Membre depuis {user?.createdAt?.getFullYear()}
                </Badge>
             </div>
             <Separator className="my-4" />
@@ -52,7 +52,7 @@ export default function ProfileCard() {
                <div className="flex items-start gap-2">
                   <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />
                   <div>
-                     <p className="text-sm font-medium">Email</p>
+                     <p className="text-sm font-medium">Adresse email</p>
                      <p className="text-sm text-muted-foreground">
                         {user?.email}
                      </p>
@@ -65,9 +65,9 @@ export default function ProfileCard() {
                      <ShieldOff className="h-4 w-4 text-muted-foreground mt-0.5" />
                   )}
                   <div>
-                     <p className="text-sm font-medium">Account Security</p>
+                     <p className="text-sm font-medium">Sécurité du compte</p>
                      <p className="text-sm text-muted-foreground">
-                        {user?.twoFactorEnabled ? '2FA Enabled' : '2FA Disabled'}
+                        {user?.twoFactorEnabled ? '2FA Activée' : '2FA Désactivée'}
                      </p>
                   </div>
                </div>

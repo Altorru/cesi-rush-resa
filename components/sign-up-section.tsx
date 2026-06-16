@@ -13,15 +13,15 @@ export default function SignUpSection() {
                   <Logo />
                </div>
                <h3 className="mt-6 text-lg font-semibold text-foreground dark:text-foreground">
-                  Enter your details below to register an account
+                  Entrez vos informations ci-dessous pour créer un compte
                </h3>
                <p className="mt-2 text-sm text-muted-foreground dark:text-muted-foreground">
-                  Already have an account?{" "}
+                  Vous avez déjà un compte ?{" "}
                   <Link
                      href="/sign-in"
                      className="font-medium text-primary hover:text-primary/90 dark:text-primary hover:dark:text-primary/90"
                   >
-                     Sign In
+                     Se connecter
                   </Link>
                </p>
                <SignUpForm />

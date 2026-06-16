@@ -20,11 +20,11 @@ export default function AppHeader({ user }: UserProps) {
             className="mx-2 data-[orientation=vertical]:h-4"
          />
          <div className="flex flex-1 items-center justify-between">
-            <h1 className="text-xl font-semibold">Welcome, {user?.name} </h1>
+            <h1 className="text-xl font-semibold">Bonjour, {user?.name} 👋</h1>
             <div className="flex items-center gap-4">
                <Button variant="outline" size="icon">
                   <Search className="h-4 w-4" />
-                  <span className="sr-only">Search</span>
+                  <span className="sr-only">Rechercher</span>
                </Button>
                <Button variant="outline" size="icon">
                   <Bell className="h-4 w-4" />

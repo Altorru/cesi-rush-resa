@@ -31,12 +31,12 @@ export default function TwoFactorVerifyForm() {
    async function onSubmit(e: React.FormEvent) {
       e.preventDefault()
       if (code.length !== 6) {
-         toast.error("Please enter a valid 6-digit code")
+         toast.error("Veuillez saisir un code valide à 6 chiffres")
          return
       }
 
       setIsLoading(true)
-      const toastId = toast.loading("Verifying code...")
+      const toastId = toast.loading("Vérification du code...")
 
       try {
          const { error } = await authClient.twoFactor.verifyTotp({
@@ -47,16 +47,16 @@ export default function TwoFactorVerifyForm() {
          toast.dismiss(toastId)
 
          if (error) {
-            toast.error(error.message || "Invalid code. Please try again.")
+            toast.error(error.message || "Code invalide. Veuillez réessayer.")
             setIsLoading(false)
             return
          }
 
-         toast.success("Verified successfully!")
+         toast.success("Vérifié avec succès !")
          router.push("/dashboard")
       } catch {
          toast.dismiss(toastId)
-         toast.error("Something went wrong. Please try again.")
+         toast.error("Une erreur est survenue. Veuillez réessayer.")
          setIsLoading(false)
       }
    }
@@ -69,10 +69,10 @@ export default function TwoFactorVerifyForm() {
                   <Shield className="h-8 w-8 text-primary" />
                </div>
                <CardTitle className="text-2xl font-bold">
-                  Two-Factor Authentication
+                  Authentification à deux facteurs
                </CardTitle>
                <CardDescription className="text-sm text-muted-foreground">
-                  Enter the 6-digit code from your authenticator app to continue.
+                  Saisissez le code à 6 chiffres de votre application d&apos;authentification pour continuer.
                </CardDescription>
             </CardHeader>
             <form onSubmit={onSubmit}>
@@ -103,7 +103,7 @@ export default function TwoFactorVerifyForm() {
                         disabled={isLoading}
                      />
                      <Label htmlFor="trust-device" className="text-sm text-muted-foreground cursor-pointer">
-                        Trust this device for 30 days
+                        Approuver cet appareil pour 30 jours
                      </Label>
                   </div>
                </CardContent>
@@ -113,7 +113,7 @@ export default function TwoFactorVerifyForm() {
                      className="w-full"
                      disabled={code.length !== 6 || isLoading}
                   >
-                     {isLoading ? "Verifying..." : "Verify"}
+                     {isLoading ? "Vérification..." : "Vérifier"}
                   </Button>
                   <Button
                      type="button"
@@ -125,7 +125,7 @@ export default function TwoFactorVerifyForm() {
                      disabled={isLoading}
                   >
                      <ArrowLeft className="mr-2 h-4 w-4" />
-                     Back to sign in
+                     Retour à la connexion
                   </Button>
                </CardFooter>
             </form>

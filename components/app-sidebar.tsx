@@ -19,13 +19,13 @@ import SignOutForm from "./sign-out-form"
 const navItems = [
    {
       href: "/dashboard",
-      label: "Dashboard",
+      label: "Tableau de bord",
       icon: LayoutDashboard,
       isActive: (pathname: string) => pathname === "/dashboard",
    },
    {
       href: "/dashboard/settings",
-      label: "Settings",
+      label: "Paramètres",
       icon: Settings,
       isActive: (pathname: string) => pathname.startsWith("/dashboard/settings"),
    },

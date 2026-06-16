@@ -15,13 +15,13 @@ export default function SignOutForm() {
       await authClient.signOut({
          fetchOptions: {
             onRequest: () => {
-               toast.loading('Logging out...')
+               toast.loading('Déconnexion en cours...')
             },
             onSuccess: () => {
                toast.dismiss()
                setUser(null);
                router.push('/');
-               toast.success('Logged out successfully')
+               toast.success('Déconnecté avec succès')
             },
             onError: (ctx) => {
                toast.dismiss()
@@ -33,7 +33,7 @@ export default function SignOutForm() {
    return (
       <Button variant={"destructive"} onClick={handleLogout}>
          <LogOut className="mr-2 h-4 w-4" />
-         SignOut
+         Se déconnecter
       </Button>
    )
 }

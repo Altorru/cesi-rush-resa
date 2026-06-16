@@ -13,33 +13,33 @@ export default function SignInSection() {
                   <Logo />
                </div>
                <h3 className="mt-6 text-lg font-semibold text-foreground dark:text-foreground">
-                  Sign in to your account
+                  Connectez-vous à votre compte
                </h3>
                <p className="mt-2 text-sm text-muted-foreground dark:text-muted-foreground">
-                  Don&apos;t have an account?{" "}
+                  Vous n&apos;avez pas de compte ?{" "}
                   <Link
                      href="/sign-up"
                      className="font-medium text-primary hover:text-primary/90 dark:text-primary hover:dark:text-primary/90"
                   >
-                     Sign Up
+                     S&apos;inscrire
                   </Link>
                </p>
                <SignInForm />
 
                <p className="pt-3 text-sm text-muted-foreground">
-                  By continue, you agree to our{" "}
+                  En continuant, vous acceptez nos{" "}
                   <Link
                      href="#"
                      className="underline underline-offset-4 hover:text-primary"
                   >
-                     Terms of Service
+                     Conditions d&apos;utilisation
                   </Link>{" "}
                   and{" "}
                   <Link
                      href="#"
                      className="underline underline-offset-4 hover:text-primary"
                   >
-                     Privacy Policy
+                     Politique de confidentialité
                   </Link>
                   .
                </p>

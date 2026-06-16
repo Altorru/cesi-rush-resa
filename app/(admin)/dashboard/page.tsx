@@ -5,7 +5,7 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-6 w-full">
          <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold tracking-tight">
-               Welcome back!
+               Bon retour parmi nous !
             </h2>
          </div>
 

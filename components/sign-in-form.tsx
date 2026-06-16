@@ -32,7 +32,7 @@ export default function SignInForm() {
 
    async function onSubmit(values: z.infer<typeof signInFormSchema>) {
       const { email, password } = values;
-      const toastId = toast.loading("Signing in...")
+      const toastId = toast.loading("Connexion en cours...")
 
       try {
          const { data, error } = await authClient.signIn.email({
@@ -43,7 +43,7 @@ export default function SignInForm() {
          toast.dismiss(toastId)
 
          if (error) {
-            toast.error(error.message || "Invalid email or password")
+            toast.error(error.message || "Email ou mot de passe invalide")
             return
          }
 
@@ -52,11 +52,11 @@ export default function SignInForm() {
             return
          }
 
-         toast.success("Signed in successfully")
+         toast.success("Connecté avec succès")
          router.push("/dashboard")
       } catch {
          toast.dismiss(toastId)
-         toast.error("Something went wrong. Please try again.")
+         toast.error("Une erreur est survenue. Veuillez réessayer.")
       }
    }
 
@@ -68,9 +68,9 @@ export default function SignInForm() {
                name="email"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Email</FormLabel>
+                     <FormLabel>Adresse email</FormLabel>
                      <FormControl>
-                        <Input placeholder="m@example.com" {...field} />
+                        <Input placeholder="exemple@email.com" {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -81,7 +81,7 @@ export default function SignInForm() {
                name="password"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Password</FormLabel>
+                     <FormLabel>Mot de passe</FormLabel>
                      <FormControl>
                         <Input type="password" placeholder="********" {...field} />
                      </FormControl>
@@ -90,7 +90,7 @@ export default function SignInForm() {
                )}
             />
             <Button type="submit" className="w-full">
-               Sign In
+               Se connecter
             </Button>
          </form>
       </Form>

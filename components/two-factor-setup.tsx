@@ -68,7 +68,7 @@ export default function TwoFactorSetup() {
    // ── Start enabling 2FA ──────────────────────────────
    async function handleStartEnable() {
       setIsLoading(true)
-      const toastId = toast.loading("Preparing 2FA setup...")
+      const toastId = toast.loading("Préparation de la configuration 2FA...")
 
       try {
          const { data, error } = await authClient.twoFactor.enable({
@@ -78,7 +78,7 @@ export default function TwoFactorSetup() {
          toast.dismiss(toastId)
 
          if (error) {
-            toast.error(error.message || "Incorrect password")
+            toast.error(error.message || "Mot de passe incorrect")
             setIsLoading(false)
             return
          }
@@ -90,7 +90,7 @@ export default function TwoFactorSetup() {
          }
       } catch {
          toast.dismiss(toastId)
-         toast.error("Something went wrong")
+         toast.error("Une erreur est survenue")
       }
 
       setIsLoading(false)
@@ -99,12 +99,12 @@ export default function TwoFactorSetup() {
    // ── Verify TOTP code to complete setup ──────────────
    async function handleVerify() {
       if (totpCode.length !== 6) {
-         toast.error("Please enter a valid 6-digit code")
+         toast.error("Veuillez saisir un code valide à 6 chiffres")
          return
       }
 
       setIsLoading(true)
-      const toastId = toast.loading("Verifying code...")
+      const toastId = toast.loading("Vérification du code...")
 
       try {
          const { error } = await authClient.twoFactor.verifyTotp({
@@ -114,7 +114,7 @@ export default function TwoFactorSetup() {
          toast.dismiss(toastId)
 
          if (error) {
-            toast.error(error.message || "Invalid code. Try again.")
+            toast.error(error.message || "Code invalide. Veuillez réessayer.")
             setIsLoading(false)
             return
          }
@@ -124,10 +124,10 @@ export default function TwoFactorSetup() {
          setUser((prev) =>
             prev ? { ...prev, twoFactorEnabled: true } : prev
          )
-         toast.success("2FA enabled successfully!")
+         toast.success("2FA activée avec succès !")
       } catch {
          toast.dismiss(toastId)
-         toast.error("Something went wrong")
+         toast.error("Une erreur est survenue")
       }
 
       setIsLoading(false)
@@ -136,12 +136,12 @@ export default function TwoFactorSetup() {
    // ── Disable 2FA ─────────────────────────────────────
    async function handleDisable() {
       if (!password) {
-         toast.error("Please enter your password")
+         toast.error("Veuillez saisir votre mot de passe")
          return
       }
 
       setIsLoading(true)
-      const toastId = toast.loading("Disabling 2FA...")
+      const toastId = toast.loading("Désactivation de la 2FA...")
 
       try {
          const { error } = await authClient.twoFactor.disable({
@@ -151,7 +151,7 @@ export default function TwoFactorSetup() {
          toast.dismiss(toastId)
 
          if (error) {
-            toast.error(error.message || "Incorrect password")
+            toast.error(error.message || "Mot de passe incorrect")
             setIsLoading(false)
             return
          }
@@ -166,10 +166,10 @@ export default function TwoFactorSetup() {
          setUser((prev) =>
             prev ? { ...prev, twoFactorEnabled: false } : prev
          )
-         toast.success("2FA disabled successfully")
+         toast.success("2FA désactivée avec succès")
       } catch {
          toast.dismiss(toastId)
-         toast.error("Something went wrong")
+         toast.error("Une erreur est survenue")
       }
 
       setIsLoading(false)
@@ -179,11 +179,11 @@ export default function TwoFactorSetup() {
    function copyBackupCodes() {
       navigator.clipboard.writeText(backupCodes.join("\n"))
       setCopiedCodes(true)
-      toast.success("Backup codes copied to clipboard")
+      toast.success("Codes de secours copiés dans le presse-papier")
       setTimeout(() => setCopiedCodes(false), 2000)
    }
 
-   // ── Cancel / Reset ──────────────────────────────────
+   // ── Annuler / Reset ──────────────────────────────────
    function handleCancel() {
       setStep("idle")
       setPassword("")
@@ -204,13 +204,13 @@ export default function TwoFactorSetup() {
                         <Shield className="h-5 w-5 text-green-500" />
                      </div>
                      <div>
-                        <CardTitle className="text-lg">Two-Factor Authentication</CardTitle>
-                        <CardDescription>Your account is protected with 2FA</CardDescription>
+                        <CardTitle className="text-lg">Authentification à deux facteurs</CardTitle>
+                        <CardDescription>Votre compte est protégé par la 2FA</CardDescription>
                      </div>
                   </div>
                   <Badge variant="secondary" className="bg-green-500/10 text-green-500 hover:bg-green-500/20">
                      <Check className="mr-1 h-3 w-3" />
-                     Enabled
+                     Activée
                   </Badge>
                </div>
             </CardHeader>
@@ -219,17 +219,17 @@ export default function TwoFactorSetup() {
                   <div className="flex items-start gap-3">
                      <AlertCircle className="mt-0.5 h-4 w-4 text-muted-foreground shrink-0" />
                      <p className="text-sm text-muted-foreground">
-                        Two-factor authentication adds an extra layer of security to your account.
-                        To disable 2FA, enter your password below.
+                        L&apos;authentification à deux facteurs ajoute une couche de sécurité supplémentaire à votre compte.
+                        Pour désactiver la 2FA, saisissez votre mot de passe ci-dessous.
                      </p>
                   </div>
                </div>
                <div className="mt-4 space-y-3">
-                  <Label htmlFor="disable-password">Enter your password to disable 2FA</Label>
+                  <Label htmlFor="disable-password">Saisissez votre mot de passe pour désactiver la 2FA</Label>
                   <Input
                      id="disable-password"
                      type="password"
-                     placeholder="Your password"
+                     placeholder="Votre mot de passe"
                      value={password}
                      onChange={(e) => setPassword(e.target.value)}
                      disabled={isLoading}
@@ -243,7 +243,7 @@ export default function TwoFactorSetup() {
                   onClick={handleDisable}
                   disabled={!password || isLoading}
                >
-                  {isLoading ? "Disabling..." : "Disable 2FA"}
+                  {isLoading ? "Désactivation..." : "Désactiver la 2FA"}
                </Button>
             </CardFooter>
          </Card>
@@ -258,9 +258,9 @@ export default function TwoFactorSetup() {
                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                   <Smartphone className="h-7 w-7 text-primary" />
                </div>
-               <CardTitle className="text-xl">Scan QR Code</CardTitle>
+               <CardTitle className="text-xl">Scannez le QR Code</CardTitle>
                <CardDescription>
-                  Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)
+                  Scannez ce QR code avec votre application d&apos;authentification (Google Authenticator, Authy, etc.)
                </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -278,7 +278,7 @@ export default function TwoFactorSetup() {
                      </div>
                   ) : (
                      <div className="flex h-52 w-52 items-center justify-center rounded-xl border-2 border-border bg-muted">
-                        <p className="text-sm text-muted-foreground">Generating QR code...</p>
+                        <p className="text-sm text-muted-foreground">Génération du QR code...</p>
                      </div>
                   )}
                </div>
@@ -286,7 +286,7 @@ export default function TwoFactorSetup() {
                {backupCodes.length > 0 && (
                   <div className="space-y-3">
                      <div className="flex items-center justify-between">
-                        <Label className="text-sm font-medium">Backup Codes</Label>
+                        <Label className="text-sm font-medium">Codes de secours</Label>
                         <Button
                            variant="ghost"
                            size="sm"
@@ -298,7 +298,7 @@ export default function TwoFactorSetup() {
                            ) : (
                               <Copy className="h-3.5 w-3.5" />
                            )}
-                           {copiedCodes ? "Copied" : "Copy"}
+                           {copiedCodes ? "Copiés" : "Copier"}
                         </Button>
                      </div>
                      <div className="rounded-lg border border-border bg-muted/30 p-3">
@@ -316,15 +316,15 @@ export default function TwoFactorSetup() {
                      <div className="flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
                         <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                         <p className="text-xs text-muted-foreground">
-                           Save these backup codes in a safe place. You can use them to sign in
-                           if you lose access to your authenticator app.
+                           Conservez ces codes de secours dans un endroit sûr. Vous pourrez les utiliser pour vous connecter
+                           si vous perdez l&apos;accès à votre application d&apos;authentification.
                         </p>
                      </div>
                   </div>
                )}
 
                <div className="space-y-2">
-                  <Label htmlFor="verify-code">Enter the 6-digit code from your app</Label>
+                  <Label htmlFor="verify-code">Saisissez le code à 6 chiffres de votre application</Label>
                   <div className="flex justify-center">
                      <InputOTP
                         maxLength={6}
@@ -350,7 +350,7 @@ export default function TwoFactorSetup() {
                   onClick={handleVerify}
                   disabled={totpCode.length !== 6 || isLoading}
                >
-                  {isLoading ? "Verifying..." : "Verify & Enable 2FA"}
+                  {isLoading ? "Vérification..." : "Vérifier et activer la 2FA"}
                </Button>
                <Button
                   variant="ghost"
@@ -358,7 +358,7 @@ export default function TwoFactorSetup() {
                   onClick={handleCancel}
                   disabled={isLoading}
                >
-                  Cancel
+                  Annuler
                </Button>
             </CardFooter>
          </Card>
@@ -373,16 +373,16 @@ export default function TwoFactorSetup() {
                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
                   <Check className="h-8 w-8 text-green-500" />
                </div>
-               <CardTitle className="text-xl">2FA Enabled!</CardTitle>
+               <CardTitle className="text-xl">2FA Activée !</CardTitle>
                <CardDescription>
-                  Your account is now protected with two-factor authentication.
+                  Votre compte est maintenant protégé par l&apos;authentification à deux facteurs.
                </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
                {backupCodes.length > 0 && (
                   <div className="space-y-2">
                      <div className="flex items-center justify-between">
-                        <Label className="text-sm font-medium">Backup Codes</Label>
+                        <Label className="text-sm font-medium">Codes de secours</Label>
                         <Button
                            variant="ghost"
                            size="sm"
@@ -394,7 +394,7 @@ export default function TwoFactorSetup() {
                            ) : (
                               <Copy className="h-3.5 w-3.5" />
                            )}
-                           {copiedCodes ? "Copied" : "Copy"}
+                           {copiedCodes ? "Copiés" : "Copier"}
                         </Button>
                      </div>
                      <div className="rounded-lg border border-border bg-muted/30 p-3">
@@ -412,7 +412,7 @@ export default function TwoFactorSetup() {
                      <div className="flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
                         <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                         <p className="text-xs text-muted-foreground">
-                           Save these backup codes in a safe place — they won&apos;t be shown again.
+                           Conservez ces codes de secours dans un endroit sûr — ils ne seront plus affichés.
                         </p>
                      </div>
                   </div>
@@ -420,7 +420,7 @@ export default function TwoFactorSetup() {
             </CardContent>
             <CardFooter>
                <Button className="w-full" onClick={() => { setStep("idle"); setPassword("") }}>
-                  Done
+                  Terminé
                </Button>
             </CardFooter>
          </Card>
@@ -436,9 +436,9 @@ export default function TwoFactorSetup() {
                   <ShieldOff className="h-5 w-5 text-muted-foreground" />
                </div>
                <div>
-                  <CardTitle className="text-lg">Two-Factor Authentication</CardTitle>
+                  <CardTitle className="text-lg">Authentification à deux facteurs</CardTitle>
                   <CardDescription>
-                     Add an extra layer of security to your account
+                     Ajoutez une couche de sécurité supplémentaire à votre compte
                   </CardDescription>
                </div>
             </div>
@@ -449,23 +449,23 @@ export default function TwoFactorSetup() {
                   <Shield className="mt-0.5 h-4 w-4 text-primary shrink-0" />
                   <div className="space-y-2 text-sm text-muted-foreground">
                      <p>
-                        Once 2FA is enabled, you&apos;ll need to enter a code from your
-                        authenticator app every time you sign in.
+                        Une fois la 2FA activée, vous devrez saisir un code depuis votre
+                     application d&apos;authentification à chaque connexion.
                      </p>
                      <ul className="list-inside list-disc space-y-1">
-                        <li>Download an authenticator app like Google Authenticator or Authy</li>
-                        <li>Scan the QR code displayed during setup</li>
-                        <li>Enter the 6-digit code to verify</li>
+                        <li>Téléchargez une application d&apos;authentification comme Google Authenticator ou Authy</li>
+                        <li>Scannez le QR code affiché lors de la configuration</li>
+                        <li>Saisissez le code à 6 chiffres pour vérifier</li>
                      </ul>
                   </div>
                </div>
             </div>
             <div className="space-y-2">
-               <Label htmlFor="enable-password">Enter your password to continue</Label>
+               <Label htmlFor="enable-password">Saisissez votre mot de passe pour continuer</Label>
                <Input
                   id="enable-password"
                   type="password"
-                  placeholder="Your password"
+                  placeholder="Votre mot de passe"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
@@ -478,7 +478,7 @@ export default function TwoFactorSetup() {
                onClick={handleStartEnable}
                disabled={!password || isLoading}
             >
-               {isLoading ? "Setting up..." : "Enable 2FA"}
+               {isLoading ? "Configuration..." : "Activer la 2FA"}
             </Button>
          </CardFooter>
       </Card>
