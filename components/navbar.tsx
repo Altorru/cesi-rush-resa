@@ -40,7 +40,7 @@ export default function Navbar() {
         ]
 
    return (
-      <header className="sticky top-0 z-100 flex justify-center py-2">
+      <header className="sticky top-0 z-40 flex justify-center py-2">
          <div className="container border rounded-md w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2">
             <nav className="flex items-center justify-between gap-2 sm:gap-6">
                <div className="flex items-center gap-2 sm:gap-6">
