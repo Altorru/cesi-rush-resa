@@ -27,19 +27,19 @@ export default function SignUpSection() {
                <SignUpForm />
 
                <p className="pt-3 text-sm text-muted-foreground">
-                  By continue, you agree to our{" "}
+                  En continuant, vous acceptez nos{" "}
                   <Link
                      href="#"
                      className="underline underline-offset-4 hover:text-primary"
                   >
-                     Terms of Service
+                     Conditions d&apos;utilisation
                   </Link>{" "}
-                  and{" "}
+                  et{" "}
                   <Link
                      href="#"
                      className="underline underline-offset-4 hover:text-primary"
                   >
-                     Privacy Policy
+                     Politique de confidentialité
                   </Link>
                   .
                </p>
