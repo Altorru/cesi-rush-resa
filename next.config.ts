@@ -8,7 +8,9 @@ const nextConfig: NextConfig = {
         hostname: "**.googleusercontent.com",
       }
     ]
-  }
+  },
+  // Enable standalone output for Docker deployments
+  output: process.env.NODE_ENV === "production" ? "standalone" : undefined,
 };
 
 export default nextConfig;
