@@ -21,6 +21,7 @@ model User {
   accounts         Account[]
   twoFactor        TwoFactor?
   reservations     Reservation[]
+  notifications    Notification[]
 
   @@map("user")
 }
@@ -81,6 +82,22 @@ model TwoFactor {
   @@map("two_factor")
 }
 
+// ── Notifications ─────────────────────────────────────────────────
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String?
+  link      String?
+  createdAt DateTime  @default(now())
+  seenAt    DateTime?
+  deletedAt DateTime?
+
+  @@index([userId, seenAt])
+  @@map("notification")
+}
+
 // ── Domaine métier : matériel BTP + réservations ──────────────────
 // (issue #6 "supplied objects table"). Volontairement KISS : pas de
 // contrôle de disponibilité, pas de relation Prisma vers User
@@ -116,15 +133,17 @@ model Equipment {
 }
 
 model Reservation {
-  id          String    @id @default(uuid())
-  userId      String
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  equipmentId String
-  equipment   Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
-  startDate   DateTime
-  endDate     DateTime
-  createdAt   DateTime  @default(now())
-  status      String    @default("pending")
+  id              String    @id @default(uuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  equipmentId     String
+  equipment       Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  startDate       DateTime
+  endDate         DateTime
+  createdAt       DateTime  @default(now())
+  status          String    @default("pending")
+  adminMessage    String?
+  adminReviewedAt DateTime?
 
   @@index([userId])
   @@map("reservation")
