@@ -20,4 +20,5 @@ export const auth = betterAuth({
       window: 60, // time window in seconds
       max: 10,
    },
+   baseURL: process.env.BETTER_AUTH_URL!,
 })
