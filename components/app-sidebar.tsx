@@ -1,6 +1,8 @@
 "use client"
 
-import { CalendarCheck, HardHat, LayoutDashboard, Settings } from "lucide-react"
+"use client"
+
+import { CalendarCheck, HardHat, LayoutDashboard, Settings, Shield, } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -12,12 +14,12 @@ import {
    SidebarMenuButton,
    SidebarMenuItem,
    SidebarRail,
+   SidebarSeparator,
 } from "@/components/ui/sidebar"
 import Logo from "./logo"
 import SignOutForm from "./sign-out-form"
+import { useUser } from "@/context/UserContext"
 
-// isActive par item : "/dashboard" en exact (sinon il matcherait tout), les
-// autres en préfixe. "/materiel" est public (hors /dashboard).
 const navItems = [
    {
       href: "/dashboard",
@@ -45,8 +47,19 @@ const navItems = [
    },
 ] as const
 
+const adminItems = [
+   {
+      href: "/dashboard/admin",
+      label: "Administration",
+      icon: Shield,
+      isActive: (pathname: string) => pathname.startsWith("/dashboard/admin"),
+   },
+] as const
+
 export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
    const pathname = usePathname()
+   const user = useUser()
+   const isAdmin = user?.role === "admin"
 
    return (
       <Sidebar collapsible="offcanvas" {...props}>
@@ -71,6 +84,28 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
                      </SidebarMenuItem>
                   )
                })}
+
+               {isAdmin && (
+                  <>
+                     <SidebarSeparator className="my-2" />
+                     {adminItems.map((item) => {
+                        const active = item.isActive(pathname)
+                        const Icon = item.icon
+                        return (
+                           <SidebarMenuItem key={item.href}>
+                              <SidebarMenuButton asChild isActive={active} size="lg">
+                                 <Link href={item.href} className="flex items-center gap-3">
+                                    <div className="flex h-9 w-9 items-center justify-center rounded-md bg-amber-500/10">
+                                       <Icon className="h-5 w-5 text-amber-500" />
+                                    </div>
+                                    <span className="text-sm font-medium">{item.label}</span>
+                                 </Link>
+                              </SidebarMenuButton>
+                           </SidebarMenuItem>
+                        )
+                     })}
+                  </>
+               )}
             </SidebarMenu>
          </SidebarContent>
          <SidebarFooter>

@@ -20,7 +20,9 @@ export default async function DashboardLayout({
       return redirect("/sign-in")
    }
 
-   const user = session?.user;
+   const user = session?.user
+      ? { ...session.user, role: session.user.role ?? "user" }
+      : null;
    return (
       <UserProvider user={user}>
          <SidebarProvider>

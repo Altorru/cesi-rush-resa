@@ -16,9 +16,11 @@ model User {
   createdAt        DateTime
   updatedAt        DateTime
   twoFactorEnabled Boolean    @default(false)
+  role             String     @default("user")
   sessions         Session[]
   accounts         Account[]
   twoFactor        TwoFactor?
+  reservations     Reservation[]
 
   @@map("user")
 }
@@ -115,12 +117,14 @@ model Equipment {
 
 model Reservation {
   id          String    @id @default(uuid())
-  userId      String // pas de @relation -> User (cf. note ci-dessus), requêté par userId
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   equipmentId String
   equipment   Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
   startDate   DateTime
   endDate     DateTime
   createdAt   DateTime  @default(now())
+  status      String    @default("pending")
 
   @@index([userId])
   @@map("reservation")

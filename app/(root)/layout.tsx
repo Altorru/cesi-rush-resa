@@ -13,7 +13,9 @@ export default async function HomeLayout({
    const session = await auth.api.getSession({
       headers: await headers()
    });
-   const user = session?.user ?? null;
+   const user = session?.user
+      ? { ...session.user, role: session.user.role ?? "user" }
+      : null;
    return (
       <UserProvider user={user}>
          <div className="relative">

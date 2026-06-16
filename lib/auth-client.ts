@@ -1,5 +1,5 @@
 import { createAuthClient } from "better-auth/react"
-import { twoFactorClient } from "better-auth/client/plugins"
+import { twoFactorClient, adminClient } from "better-auth/client/plugins"
 
 export const authClient = createAuthClient({
    plugins: [
@@ -8,5 +8,6 @@ export const authClient = createAuthClient({
             window.location.href = "/verify-2fa";
          },
       }),
+      adminClient(),
    ],
 })
