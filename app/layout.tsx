@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "CESI Rush Resa",
   description: "Application de réservation",
   icons: {
-    icon: '/logo.png'
+    icon: '/square-logo.png'
   }
 };
 
