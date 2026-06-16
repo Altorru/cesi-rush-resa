@@ -85,7 +85,7 @@ export default function Navbar() {
                         <span className="sr-only">Menu</span>
                      </Button>
                   </SheetTrigger>
-                  <SheetContent side="right" className="w-[280px] sm:w-[320px] p-0 flex flex-col">
+                  <SheetContent side="right" hideCloseButton className="w-[280px] sm:w-[320px] p-0 flex flex-col">
                      {/* ── Header ── */}
                      <SheetHeader className="flex flex-row items-center justify-between border-b px-4 py-3">
                         <SheetTitle className="sr-only">Navigation</SheetTitle>
