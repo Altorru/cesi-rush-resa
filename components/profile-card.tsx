@@ -8,7 +8,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Check, Clock, Mail, MapPin, Shield } from "lucide-react"
+import { Check, Clock, Mail, Shield, ShieldOff } from "lucide-react"
 import { useUser } from "@/context/UserContext"
 
 export default function ProfileCard() {
@@ -22,7 +22,7 @@ export default function ProfileCard() {
                   <Avatar className="h-24 w-24 border-4 border-background">
                      <AvatarImage src={user?.image || ''} alt="John Doe" />
                      <AvatarFallback className="text-6xl font-bold">
-                        {user?.name.charAt(0)}
+                        {user?.name?.charAt(0)}
                      </AvatarFallback>
                   </Avatar>
                </div>
@@ -44,18 +44,11 @@ export default function ProfileCard() {
                </Badge>
                <Badge variant="outline" className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
-                  Member since {user?.createdAt.getFullYear()}
+                  Member since {user?.createdAt?.getFullYear()}
                </Badge>
             </div>
             <Separator className="my-4" />
             <div className="space-y-4">
-               <div className="flex items-start gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <div>
-                     <p className="text-sm font-medium">Location</p>
-                     <p className="text-sm text-muted-foreground">New York, USA</p>
-                  </div>
-               </div>
                <div className="flex items-start gap-2">
                   <Mail className="h-4 w-4 text-muted-foreground mt-0.5" />
                   <div>
@@ -66,10 +59,16 @@ export default function ProfileCard() {
                   </div>
                </div>
                <div className="flex items-start gap-2">
-                  <Shield className="h-4 w-4 text-muted-foreground mt-0.5" />
+                  {user?.twoFactorEnabled ? (
+                     <Shield className="h-4 w-4 text-green-500 mt-0.5" />
+                  ) : (
+                     <ShieldOff className="h-4 w-4 text-muted-foreground mt-0.5" />
+                  )}
                   <div>
                      <p className="text-sm font-medium">Account Security</p>
-                     <p className="text-sm text-muted-foreground">2FA Enabled</p>
+                     <p className="text-sm text-muted-foreground">
+                        {user?.twoFactorEnabled ? '2FA Enabled' : '2FA Disabled'}
+                     </p>
                   </div>
                </div>
             </div>

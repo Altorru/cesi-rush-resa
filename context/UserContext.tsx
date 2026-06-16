@@ -1,11 +1,11 @@
 "use client"
 
 import type { User } from "@/lib/types";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, type Dispatch, type SetStateAction } from "react";
 
 interface UserContextType {
    user: User | null;
-   setUser: (user: User | null) => void;
+   setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(undefined);
