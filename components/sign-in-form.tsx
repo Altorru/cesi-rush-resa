@@ -14,13 +14,14 @@ import { authClient } from "@/lib/auth-client"
 import { signInFormSchema } from "@/lib/auth-schema"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 
 
 export default function SignInForm() {
+   const router = useRouter()
    const form = useForm<z.infer<typeof signInFormSchema>>({
       resolver: zodResolver(signInFormSchema),
       defaultValues: {
@@ -31,23 +32,32 @@ export default function SignInForm() {
 
    async function onSubmit(values: z.infer<typeof signInFormSchema>) {
       const { email, password } = values;
-      await authClient.signIn.email({
-         email,
-         password,
-      }, {
-         onRequest: () => {
-            toast.loading("Signing in...")
-         },
-         onSuccess: () => {
-            toast.dismiss();
-            toast.success("Signed in successfully");
-            redirect("/dashboard")
-         },
-         onError: (ctx) => {
-            toast.dismiss();
-            toast.error(ctx.error.message);
-         },
-      });
+      const toastId = toast.loading("Signing in...")
+
+      try {
+         const { data, error } = await authClient.signIn.email({
+            email,
+            password,
+         })
+
+         toast.dismiss(toastId)
+
+         if (error) {
+            toast.error(error.message || "Invalid email or password")
+            return
+         }
+
+         if (data && "twoFactorRedirect" in data && data.twoFactorRedirect) {
+            router.push("/verify-2fa")
+            return
+         }
+
+         toast.success("Signed in successfully")
+         router.push("/dashboard")
+      } catch {
+         toast.dismiss(toastId)
+         toast.error("Something went wrong. Please try again.")
+      }
    }
 
    return (
