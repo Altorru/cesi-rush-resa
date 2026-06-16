@@ -1,11 +1,12 @@
 "use client"
 
-import { Bell, Search } from "lucide-react"
+import { Search } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import type { User } from "@/lib/types"
 import { Separator } from "./ui/separator"
+import NotificationBell from "./notification-bell"
 
 type UserProps = {
    user: User | null
@@ -26,10 +27,7 @@ export default function AppHeader({ user }: UserProps) {
                   <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   <span className="sr-only">Rechercher</span>
                </Button>
-               <Button variant="outline" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
-                  <Bell className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                  <span className="sr-only">Notifications</span>
-               </Button>
+               <NotificationBell />
             </div>
          </div>
       </header>
