@@ -33,8 +33,6 @@ Edit `.env` after copying from `.example.env`:
 | `BETTER_AUTH_SECRET` | — | ✅ |
 | `BETTER_AUTH_URL` | `http://localhost:3000` | ✅ |
 | `DATABASE_URL` | `postgresql://cesi_rush_resa:***@db:5432/cesi_rush_resa` | ✅ |
-| `GOOGLE_CLIENT_ID` | — | for Google login |
-| `GOOGLE_CLIENT_SECRET` | — | for Google login |
 
 ---
 

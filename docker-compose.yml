@@ -43,10 +43,6 @@ services:
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-change-me-to-a-random-secret}
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
 
-      # ── Google OAuth (optional) ──────────────
-      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
-      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
-
       # ── Next.js ──────────────────────────────
       NODE_ENV: ${NODE_ENV:-development}
       NEXT_TELEMETRY_DISABLED: "1"
