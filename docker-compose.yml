@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  # ──────────────────────────────────────────────
+  # PostgreSQL Database
+  # ──────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: cesi-rush-resa-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cesi_rush_resa}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cesi_rush_resa_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-cesi_rush_resa}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cesi_rush_resa} -d ${POSTGRES_DB:-cesi_rush_resa}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ──────────────────────────────────────────────
+  # Next.js Application
+  # ──────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps  # Use 'deps' stage for dev; override to 'runner' for prod
+    image: cesi-rush-resa-app
+    container_name: cesi-rush-resa-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # ── Database ──────────────────────────────
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-cesi_rush_resa}:${POSTGRES_PASSWORD:-cesi_rush_resa_pass}@db:5432/${POSTGRES_DB:-cesi_rush_resa}?schema=public"
+
+      # ── Auth ──────────────────────────────────
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-change-me-to-a-random-secret}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+
+      # ── Google OAuth (optional) ──────────────
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+
+      # ── Next.js ──────────────────────────────
+      NODE_ENV: ${NODE_ENV:-development}
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Enable polling so file changes trigger hot-reload inside Docker
+      # (OS-level file events don't cross the Docker Desktop filesystem boundary)
+      WATCHPACK_POLLING: "true"
+    volumes:
+      # Mount source code for hot-reloading in development
+      - ./:/app
+      # Exclude node_modules from the host to use the container's copy
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      db:
+        condition: service_healthy
+    # Override command for development (Turbopack with hot reload)
+    command: sh -c "bunx prisma generate && bun run dev"
+
+volumes:
+  pgdata:
+    name: cesi-rush-resa-pgdata
