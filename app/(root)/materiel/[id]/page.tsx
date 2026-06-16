@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Wrench } from "lucide-react"
 import { notFound } from "next/navigation"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
@@ -35,7 +36,21 @@ export default async function MaterielDetailPage({
             <Link href="/materiel">← Retour au catalogue</Link>
          </Button>
 
-         <Card>
+         <Card className="overflow-hidden pt-0">
+            <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+               {item.imageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                     src={item.imageUrl}
+                     alt={item.name}
+                     className="h-full w-full object-cover"
+                  />
+               ) : (
+                  <div className="flex h-full w-full items-center justify-center text-muted-foreground/40">
+                     <Wrench className="size-14" />
+                  </div>
+               )}
+            </div>
             <CardHeader>
                <div className="flex items-start justify-between gap-2">
                   <CardTitle className="text-2xl">{item.name}</CardTitle>

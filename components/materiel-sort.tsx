@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import {
    Select,
    SelectContent,
@@ -20,9 +20,17 @@ const OPTIONS = [
 export default function MaterielSort({ value }: { value: string }) {
    const router = useRouter()
    const pathname = usePathname()
+   const searchParams = useSearchParams()
+
+   // Conserve les autres params (ex. ?cat=) au lieu d'écraser toute la query.
+   const onSort = (v: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set("sort", v)
+      router.push(`${pathname}?${params.toString()}`)
+   }
 
    return (
-      <Select value={value} onValueChange={(v) => router.push(`${pathname}?sort=${v}`)}>
+      <Select value={value} onValueChange={onSort}>
          <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Trier" />
          </SelectTrigger>

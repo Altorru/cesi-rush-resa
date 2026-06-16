@@ -52,7 +52,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans antialiased">
-        <NextTopLoader showSpinner={false} height={6} color="#000000" />
+        <NextTopLoader showSpinner={false} height={4} color="#f26a1b" />
         <Toaster richColors position="top-right" />
         <main className="min-h-screen">
           {children}

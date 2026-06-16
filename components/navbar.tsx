@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import { Button } from './ui/button'
 import SignOutForm from './sign-out-form'
 import Logo from './logo'
-import { GithubStars } from './github-stars'
 import { useUser } from '@/context/UserContext'
 import {
    Sheet,
@@ -39,7 +38,7 @@ export default function Navbar() {
            { href: "/", label: "Accueil", icon: Home },
            { href: "/materiel", label: "Matériel", icon: HardHat },
            { href: "/sign-in", label: "Connexion", icon: LogIn },
-           { href: "/sign-up", label: "S&apos;inscrire", icon: UserPlus },
+           { href: "/sign-up", label: "S'inscrire", icon: UserPlus },
         ]
 
    return (
@@ -78,7 +77,6 @@ export default function Navbar() {
                         </Button>
                      </>
                   )}
-                  <GithubStars />
                </div>
 
                {/* ── Mobile burger ── */}
@@ -138,11 +136,6 @@ export default function Navbar() {
                               <SignOutForm />
                            </div>
                         )}
-                     </div>
-
-                     {/* ── Footer ── */}
-                     <div className="border-t px-4 py-4">
-                        <GithubStars />
                      </div>
                   </SheetContent>
                </Sheet>
