@@ -40,5 +40,13 @@ else
   bunx prisma db push
 fi
 
+# Seed reference data (BTP equipment catalogue). The seed script is idempotent:
+# it skips when the catalogue is already populated, so this is safe on every boot.
+# Best-effort + non-fatal: the production (runner) image ships only the generated
+# Prisma client, not the full node_modules, so seeding may be a no-op there — it
+# must never block startup.
+echo "🌱 Seeding reference data..."
+bun prisma/seed.ts || echo "⚠️  Seed skipped (already populated or seed deps unavailable)."
+
 echo "🚀 Starting application..."
 exec "$@"

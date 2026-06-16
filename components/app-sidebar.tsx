@@ -1,6 +1,6 @@
 "use client"
 
-import { LayoutDashboard, Settings } from "lucide-react"
+import { CalendarCheck, HardHat, LayoutDashboard, Settings } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -16,12 +16,26 @@ import {
 import Logo from "./logo"
 import SignOutForm from "./sign-out-form"
 
+// isActive par item : "/dashboard" en exact (sinon il matcherait tout), les
+// autres en préfixe. "/materiel" est public (hors /dashboard).
 const navItems = [
    {
       href: "/dashboard",
       label: "Tableau de bord",
       icon: LayoutDashboard,
       isActive: (pathname: string) => pathname === "/dashboard",
+   },
+   {
+      href: "/materiel",
+      label: "Matériel",
+      icon: HardHat,
+      isActive: (pathname: string) => pathname === "/materiel" || pathname.startsWith("/materiel/"),
+   },
+   {
+      href: "/dashboard/reservations",
+      label: "Mes réservations",
+      icon: CalendarCheck,
+      isActive: (pathname: string) => pathname.startsWith("/dashboard/reservations"),
    },
    {
       href: "/dashboard/settings",
@@ -47,10 +61,7 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
                   return (
                      <SidebarMenuItem key={item.href}>
                         <SidebarMenuButton asChild isActive={active} size="lg">
-                           <Link
-                              href={item.href}
-                              className="flex items-center gap-3"
-                           >
+                           <Link href={item.href} className="flex items-center gap-3">
                               <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10">
                                  <Icon className="h-5 w-5" />
                               </div>

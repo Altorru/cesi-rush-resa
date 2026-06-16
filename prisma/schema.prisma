@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,14 +8,14 @@ datasource db {
 }
 
 model User {
-  id               String       @id @default(uuid())
-  email            String    @unique
+  id               String     @id @default(uuid())
+  email            String     @unique
   name             String?
   emailVerified    Boolean
   image            String?
   createdAt        DateTime
   updatedAt        DateTime
-  twoFactorEnabled Boolean @default(false)
+  twoFactorEnabled Boolean    @default(false)
   sessions         Session[]
   accounts         Account[]
   twoFactor        TwoFactor?
@@ -78,4 +77,51 @@ model TwoFactor {
   user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("two_factor")
+}
+
+// ── Domaine métier : matériel BTP + réservations ──────────────────
+// (issue #6 "supplied objects table"). Volontairement KISS : pas de
+// contrôle de disponibilité, pas de relation Prisma vers User
+// (les rôles/users sont gérés à part — issues #3/#4).
+
+// Catégories d'outils (reprises de la home d'Alyssa). Libellés FR dans
+// lib/equipment-categories.ts. NB: enum figé ici, à réconcilier si une
+// table Category arrive côté collègue.
+enum EquipmentCategory {
+  PERCAGE_FIXATION
+  DECOUPE
+  MACONNERIE
+  PEINTURE_FINITION
+  ELECTRIQUE_ENERGIE
+  LEVAGE_MANUTENTION
+  MESURE_CONTROLE
+  EXTERIEUR_TERRASSEMENT
+  NETTOYAGE
+}
+
+model Equipment {
+  id           String            @id @default(uuid())
+  name         String
+  description  String?
+  category     EquipmentCategory
+  quantity     Int               @default(1)
+  imageUrl     String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  reservations Reservation[]
+
+  @@map("equipment")
+}
+
+model Reservation {
+  id          String    @id @default(uuid())
+  userId      String // pas de @relation -> User (cf. note ci-dessus), requêté par userId
+  equipmentId String
+  equipment   Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime  @default(now())
+
+  @@index([userId])
+  @@map("reservation")
 }

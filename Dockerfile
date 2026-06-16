@@ -5,9 +5,11 @@ FROM oven/bun:1-alpine AS deps
 WORKDIR /app
 
 # Copy package.json and Prisma schema before install so that
-# the postinstall script (prisma generate) can find schema.prisma
+# the postinstall script (prisma generate) can find schema.prisma.
+# scripts/ is required too: postinstall runs scripts/prepare-db-url.js.
 COPY package.json bun.lock ./
 COPY prisma ./prisma
+COPY scripts ./scripts
 
 # Install all dependencies (dev + prod) in one pass
 # postinstall (prisma generate) runs automatically

@@ -18,6 +18,11 @@ export default function Navbar() {
                   <Logo />
                </div>
                <div className='flex items-center gap-1 sm:gap-2'>
+                  <Link href="/materiel">
+                     <Button variant="ghost" size="sm" className="text-xs sm:text-sm sm:h-9">
+                        Matériel
+                     </Button>
+                  </Link>
                   {user ? (
                      <>
                         <Link

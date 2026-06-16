@@ -58,8 +58,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    # Override command for development (Turbopack with hot reload)
-    command: sh -c "bunx prisma generate && bun run dev"
+    # Override command for development (Turbopack with hot reload).
+    # Generate client, apply committed migrations, seed the catalogue (idempotent),
+    # then start the dev server — a cold `docker compose up` is self-sufficient.
+    command: sh -c "bunx prisma generate && bunx prisma migrate deploy && bun prisma/seed.ts && bun run dev"
 
 volumes:
   pgdata:
